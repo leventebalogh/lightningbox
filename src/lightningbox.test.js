@@ -9,7 +9,8 @@ const {
     MODAL_PREV_CLASS,
     getElements,
     registerCallbackOnElements,
-    openModal
+    openModal,
+    closeModal
 } = require('./lightningbox');
 
 const CLASS = 'gallery';
@@ -83,6 +84,18 @@ describe('LightningBox', () => {
             expect(getElements(`.${ MODAL_IMAGE_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
+        });
+    });
+
+    describe('closeModal', () => {
+        it('should remove the modal from the dom', () => {
+            const elements = getElements('.gallery a');
+            const [element] = elements;
+
+            openModal(element, elements);
+            closeModal();
+
+            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(0);
         });
     });
 });

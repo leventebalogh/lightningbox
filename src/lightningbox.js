@@ -15,7 +15,8 @@ module.exports = {
     MODAL_PREV_CLASS,
     getElements,
     registerCallbackOnElements,
-    openModal
+    openModal,
+    closeModal
 };
 
 function registerCallbackOnElements (selector, callback, event='click') {
@@ -37,6 +38,10 @@ function openModal (element, elements=[]) {
     const html = getModalHtml(element, elements);
 
     addElement(html);
+}
+
+function closeModal () {
+    removeElement(`.${ MODAL_CLASS }`)
 }
 
 function getModalHtml (element, elements) {
