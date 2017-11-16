@@ -49,16 +49,29 @@ function closeModal () {
 }
 
 function getModalHtml (element, elements) {
-    const imageUrl = element.getAttribute('href');
-
     return `
-        <div class="${ MODAL_CLASS }">
-            <div class="${ MODAL_CLOSE_CLASS }">&times;</div>
-            <div class="${ MODAL_IMAGES_CLASS }">
-                <div class="${ MODAL_IMAGE_CLASS } ${ MODAL_IMAGE_ACTIVE_CLASS }" style="background-image: url('${ imageUrl }');"></div>
-            </div>
-            <div class="${ MODAL_NEXT_CLASS }"></div>
-            <div class="${ MODAL_PREV_CLASS }"></div>
+    <div class="${ MODAL_CLASS }">
+        <div class="${ MODAL_CLOSE_CLASS }">&times;</div>
+        <div class="${ MODAL_IMAGES_CLASS }">
+            ${ getImagesHtml(element, elements) }
         </div>
+        <div class="${ MODAL_NEXT_CLASS }"></div>
+        <div class="${ MODAL_PREV_CLASS }"></div>
+    </div>
     `;
+}
+
+function getImagesHtml (element, elements) {
+    return [...elements].reduce((html, el) => {
+        const newHtml = getImageHtml(el, element === el);
+
+        return `${ html }\n${ newHtml }`;
+    }, '');
+}
+
+function getImageHtml (element, isActive=false) {
+    const imageUrl = element.getAttribute('href');
+    const activeClass = isActive ? MODAL_IMAGE_ACTIVE_CLASS : '';
+
+    return `<div class="${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
 }

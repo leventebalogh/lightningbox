@@ -12,6 +12,7 @@ const {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,
     MODAL_IMAGE_CLASS,
+    MODAL_IMAGES_CLASS,
     MODAL_IMAGE_ACTIVE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
@@ -89,7 +90,6 @@ describe('LightningBox', () => {
 
             expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_CLOSE_CLASS }`)).to.have.lengthOf(1);
-            expect(getElements(`.${ MODAL_IMAGE_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
         });
@@ -103,6 +103,18 @@ describe('LightningBox', () => {
             openModal(element, elements);
 
             expect(getStyle(selector)).to.contain(`background-image: url('${ href }')`);
+        });
+
+        it('should have all the images loaded in the dom', () => {
+            const elements = getElements('.gallery a');
+            const [element] = elements;
+            const href = element.getAttribute('href');
+            const selector = `.${ MODAL_IMAGES_CLASS }`;
+
+            openModal(element, elements);
+
+            const html = getHtml(selector);
+            elements.forEach(element => expect(html).to.contain(element.getAttribute('href')));
         });
     });
 
