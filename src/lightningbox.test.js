@@ -3,6 +3,10 @@ const { expect } = require('chai');
 const { createFromHtmlString, addElement, removeElement, dispatchEvent } = require('./utils');
 const {
     MODAL_CLASS,
+    MODAL_CLOSE_CLASS,
+    MODAL_IMAGE_CLASS,
+    MODAL_NEXT_CLASS,
+    MODAL_PREV_CLASS,
     getElements,
     registerCallbackOnElements,
     openModal
@@ -75,6 +79,10 @@ describe('LightningBox', () => {
             openModal(element, elements);
 
             expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+            expect(getElements(`.${ MODAL_CLOSE_CLASS }`)).to.have.lengthOf(1);
+            expect(getElements(`.${ MODAL_IMAGE_CLASS }`)).to.have.lengthOf(1);
+            expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
+            expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
         });
     });
 });
