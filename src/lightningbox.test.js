@@ -1,6 +1,12 @@
 const sinon = require('sinon');
 const { expect } = require('chai');
-const { createFromHtmlString, addElement, removeElement, dispatchEvent } = require('./utils');
+const {
+    createFromHtmlString,
+    addElement,
+    removeElement,
+    dispatchEvent,
+    getHtml
+} = require('./utils');
 const {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,
@@ -84,6 +90,17 @@ describe('LightningBox', () => {
             expect(getElements(`.${ MODAL_IMAGE_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
+        });
+
+        it('should display the clicked image', () => {
+            const elements = getElements('.gallery a');
+            const [element] = elements;
+            const href = element.getAttribute('href');
+            const modalSelector = `.${ MODAL_CLASS }`;
+
+            openModal(element, elements);
+
+            expect(getHtml(modalSelector)).to.contain(`background-image: url('${ href }')`);
         });
     });
 

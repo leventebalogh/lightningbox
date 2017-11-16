@@ -2,7 +2,8 @@ module.exports = {
     createFromHtmlString,
     addElement,
     removeElement,
-    dispatchEvent
+    dispatchEvent,
+    getHtml
 };
 
 function createFromHtmlString (html) {
@@ -42,4 +43,14 @@ function dispatchEvent (selector, eventType='click') {
 
     event.initEvent(eventType, false, true);
     element.dispatchEvent(event);
+}
+
+function getHtml (selector) {
+    const element = document.querySelector(selector);
+
+    if (element) {
+        return element.innerHTML;
+    }
+
+    return null;
 }

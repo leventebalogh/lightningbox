@@ -45,10 +45,12 @@ function closeModal () {
 }
 
 function getModalHtml (element, elements) {
+    const imageUrl = element.getAttribute('href');
+
     return `
         <div class="${ MODAL_CLASS }">
             <div class="${ MODAL_CLOSE_CLASS }">&times;</div>
-            <div class="${ MODAL_IMAGE_CLASS }" style="background-image: url('');"></div>
+            <div class="${ MODAL_IMAGE_CLASS }" style="background-image: url('${ imageUrl }');"></div>
             <div class="${ MODAL_NEXT_CLASS }"></div>
             <div class="${ MODAL_PREV_CLASS }"></div>
         </div>
