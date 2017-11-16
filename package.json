@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
+    "build": "rm -rf ./build && webpack --config webpack.config.js",
+    "test": "mocha --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
+    "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\""
   },
   "author": "",
   "license": "ISC",
@@ -19,5 +21,14 @@
     "sass-loader": "^6.0.6",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "copy-webpack-plugin": "^4.2.0",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^11.3.0",
+    "mocha": "^4.0.1",
+    "sinon": "^4.1.2",
+    "sinon-chai": "^2.14.0"
   }
 }

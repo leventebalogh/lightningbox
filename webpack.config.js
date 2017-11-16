@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const BUILD_PATH = path.resolve(__dirname, './build');
 const JS_ENTRY_PATH = path.resolve(__dirname, './src/index.js');
@@ -31,7 +32,10 @@ module.exports = {
     },
     plugins: [
         htmlWebpackPlugin,
-        extractSassPlugin
+        extractSassPlugin,
+        new CopyWebpackPlugin([
+            { from: 'images', to: 'images' }
+        ])
     ]
 };
 
