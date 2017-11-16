@@ -3,7 +3,8 @@ module.exports = {
     addElement,
     removeElement,
     dispatchEvent,
-    getHtml
+    getHtml,
+    getStyle
 };
 
 function createFromHtmlString (html) {
@@ -50,6 +51,16 @@ function getHtml (selector) {
 
     if (element) {
         return element.innerHTML;
+    }
+
+    return null;
+}
+
+function getStyle (selector) {
+    const element = document.querySelector(selector);
+
+    if (element) {
+        return element.getAttribute('style');
     }
 
     return null;

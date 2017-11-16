@@ -3,6 +3,8 @@ const { addElement, removeElement } = require('./utils');
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
+const MODAL_IMAGES_CLASS = 'lb-modal-images';
+const MODAL_ACTIVE_IMAGE_CLASS = 'lb-modal-image-active';
 const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
@@ -10,6 +12,8 @@ const MODAL_PREV_CLASS = 'lb-modal-prev';
 module.exports = {
     MODAL_CLASS,
     MODAL_IMAGE_CLASS,
+    MODAL_IMAGES_CLASS,
+    MODAL_ACTIVE_IMAGE_CLASS,
     MODAL_CLOSE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
@@ -50,7 +54,11 @@ function getModalHtml (element, elements) {
     return `
         <div class="${ MODAL_CLASS }">
             <div class="${ MODAL_CLOSE_CLASS }">&times;</div>
-            <div class="${ MODAL_IMAGE_CLASS }" style="background-image: url('${ imageUrl }');"></div>
+            <div class="${ MODAL_IMAGES_CLASS }">
+                <div class="${ MODAL_IMAGE_CLASS } ${ MODAL_ACTIVE_IMAGE_CLASS }"
+                     style="background-image: url('${ imageUrl }');">
+                </div>
+            </div>
             <div class="${ MODAL_NEXT_CLASS }"></div>
             <div class="${ MODAL_PREV_CLASS }"></div>
         </div>

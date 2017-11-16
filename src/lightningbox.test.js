@@ -5,12 +5,14 @@ const {
     addElement,
     removeElement,
     dispatchEvent,
-    getHtml
+    getHtml,
+    getStyle
 } = require('./utils');
 const {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,
     MODAL_IMAGE_CLASS,
+    MODAL_ACTIVE_IMAGE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
     getElements,
@@ -96,11 +98,11 @@ describe('LightningBox', () => {
             const elements = getElements('.gallery a');
             const [element] = elements;
             const href = element.getAttribute('href');
-            const modalSelector = `.${ MODAL_CLASS }`;
+            const selector = `.${ MODAL_ACTIVE_IMAGE_CLASS }`;
 
             openModal(element, elements);
 
-            expect(getHtml(modalSelector)).to.contain(`background-image: url('${ href }')`);
+            expect(getStyle(selector)).to.contain(`background-image: url('${ href }')`);
         });
     });
 
