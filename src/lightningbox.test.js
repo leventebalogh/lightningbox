@@ -12,7 +12,7 @@ const {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,
     MODAL_IMAGE_CLASS,
-    MODAL_ACTIVE_IMAGE_CLASS,
+    MODAL_IMAGE_ACTIVE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
     getElements,
@@ -98,7 +98,7 @@ describe('LightningBox', () => {
             const elements = getElements('.gallery a');
             const [element] = elements;
             const href = element.getAttribute('href');
-            const selector = `.${ MODAL_ACTIVE_IMAGE_CLASS }`;
+            const selector = `.${ MODAL_IMAGE_ACTIVE_CLASS }`;
 
             openModal(element, elements);
 
