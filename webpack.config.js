@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const BUILD_PATH = path.resolve(__dirname, './build');
 const JS_ENTRY_PATH = path.resolve(__dirname, './src/index.js');
@@ -35,7 +36,8 @@ module.exports = {
         extractSassPlugin,
         new CopyWebpackPlugin([
             { from: 'images', to: 'images' }
-        ])
+        ]),
+        new UglifyJsPlugin()
     ]
 };
 
