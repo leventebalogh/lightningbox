@@ -5,7 +5,7 @@ import {
     addClass,
     removeClass
 } from './utils';
-import './style/main.scss';
+import './style.scss';
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
