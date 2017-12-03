@@ -43,7 +43,7 @@ function getHtmlWebpackPlugin () {
     return new HtmlWebpackPlugin({
         template: HTML_ENTRY_PATH,
         filename: 'index.html',
-        inject: false
+        inject: true
     });
 }
 

@@ -5,6 +5,7 @@ import {
     addClass,
     removeClass
 } from './utils';
+import './style/main.scss';
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
@@ -13,6 +14,8 @@ const MODAL_IMAGE_ACTIVE_CLASS = 'lb-modal-image-active';
 const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
+const ICON_SIZE = 64;
+const ICON_COLOR = '#ffffff';
 const DEFAULT_STATE = {
     isModalOpen: false,
     activeIndex: 0,
@@ -52,30 +55,38 @@ function registerCallbackOnElements (selector, callback, event='click') {
     const elements = getElements(selector);
 
     if (elements.length) {
-        [...elements].forEach(element => element.addEventListener(
-            event,
-            () => callback(element, elements)
-        ));
+        [...elements].forEach(element => {
+            element.addEventListener(event, e => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callback(element, elements);
+            });
+        });
     }
 }
 
 function openModal (element, elements=[]) {
-    setStateFromElements(element, elements);
-    setModalHTML(element, elements);
-    addEventListeners();
+    if (state.isModalOpen) {
+        return;
+    }
 
     setState({ isModalOpen: true });
+    setStateFromElements(element, elements);
+    addDOMElement(getModalHtml(element, elements));
+    addEventListeners();
 }
 
 function closeModal () {
     removeDOMElement(`.${ MODAL_CLASS }`);
-
     setState({ isModalOpen: false });
 }
 
 function next () {
+    console.log('NEXT');
     removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
     addClass(getNextElement(), MODAL_IMAGE_ACTIVE_CLASS);
+    console.log('NEXT LOADED');
 
     setState({ activeIndex: getNextIndex() });
 }
@@ -99,17 +110,6 @@ function addEventListeners () {
     registerCallbackOnElements(`.${ MODAL_CLOSE_CLASS }`, closeModal, 'click');
     registerCallbackOnElements(`.${ MODAL_NEXT_CLASS }`, next, 'click');
     registerCallbackOnElements(`.${ MODAL_PREV_CLASS }`, prev, 'click');
-}
-
-function setModalHTML (element, elements) {
-    if (state.isModalOpen) {
-        const modalImages = document.querySelector(`.${ MODAL_IMAGES_CLASS }`);
-        const newImagesHTML = getImagesHtml(element, elements);
-
-        modalImages.innerHTML = newImagesHTML;
-    } else {
-        addDOMElement(getModalHtml(element, elements));
-    }
 }
 
 function setStateFromElements (element, elements) {
@@ -168,12 +168,12 @@ function getPrevIndex () {
 function getModalHtml (element, elements) {
     return `
     <div class="${ MODAL_CLASS }">
-        <div class="${ MODAL_CLOSE_CLASS }">&times;</div>
+        <div class="${ MODAL_CLOSE_CLASS }">${ getCloseSVG() }</div>
         <div class="${ MODAL_IMAGES_CLASS }">
             ${ getImagesHtml(element, elements) }
         </div>
-        <div class="${ MODAL_NEXT_CLASS }"></div>
-        <div class="${ MODAL_PREV_CLASS }"></div>
+        <div class="${ MODAL_NEXT_CLASS }">${ getArrowLeftSVG() }</div>
+        <div class="${ MODAL_PREV_CLASS }">${ getArrowRightSVG() }</div>
     </div>
     `;
 }
@@ -191,4 +191,25 @@ function getImageHtml (element, isActive=false) {
     const activeClass = isActive ? MODAL_IMAGE_ACTIVE_CLASS : '';
 
     return `<div class="${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
+}
+
+function getArrowLeftSVG () {
+    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE }px" height="${ ICON_SIZE }px" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
+            <g><polyline fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" points="27,15 44,32 27,49"/></g>
+            <g><circle fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" cx="${ ICON_SIZE / 2 }" cy="${ ICON_SIZE / 2 }" r="30.999"/></g>
+            </svg>`;
+}
+
+function getArrowRightSVG () {
+    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE}px" height="${ ICON_SIZE}px" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
+            <g><polyline fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" points="37,15 20,32 37,49 "/></g>
+            <g><circle fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" cx="${ ICON_SIZE / 2 }" cy="${ ICON_SIZE / 2 }" r="30.999"/></g>
+            </svg>`;
+}
+
+function getCloseSVG () {
+    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE }" height="${ ICON_SIZE }" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
+            <g><line fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" x1="18.947" y1="17.153" x2="45.045" y2="43.056"/></g>
+            <g><line fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" x1="19.045" y1="43.153" x2="44.947" y2="17.056"/></g>
+            </svg>`;
 }
