@@ -1,6 +1,4 @@
 const _ = require('lodash');
+const { lightningbox } = require('./lightningbox');
 
-function init (selector) {
-    const elements = document.querySelectorAll(selector);
-
-}
+lightningbox('.gallery > img');
