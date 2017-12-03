@@ -4,17 +4,19 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const BUILD_PATH = path.resolve(__dirname, './build');
-const JS_ENTRY_PATH = path.resolve(__dirname, './src/example/index.js');
+const BUILD_PATH = path.resolve(__dirname, './dist');
 const HTML_ENTRY_PATH = path.resolve(__dirname, './src/example/index.html');
 const htmlWebpackPlugin = getHtmlWebpackPlugin();
 const extractSassPlugin = getExtractSassPlugin();
 
 module.exports = {
-    entry: JS_ENTRY_PATH,
+    entry: {
+        lightningbox: path.resolve(__dirname, './src/targets/browser.js'),
+        example: path.resolve(__dirname, './src/example/index.js')
+    },
     output: {
         path: BUILD_PATH,
-        filename: 'build.[chunkhash].js'
+        filename: '[name].min.js'
     },
     module: {
         rules: [
@@ -51,7 +53,7 @@ function getHtmlWebpackPlugin () {
 
 function getExtractSassPlugin () {
     return new ExtractTextPlugin({
-        filename: '[name].[contenthash].css',
+        filename: 'lightningbox.min.css',
         disable: process.env.NODE_ENV === 'development'
     });
 }

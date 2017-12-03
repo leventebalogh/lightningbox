@@ -1,14 +1,14 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
-import {
+const sinon = require('sinon');
+const { expect } = require('chai');
+const {
     createFromHtmlString,
     addDOMElement,
     removeDOMElement,
     dispatchEvent,
     getHtml,
     getStyle
-} from '../utils';
-import {
+} = require('./utils');
+const {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,
     MODAL_IMAGE_CLASS,
@@ -25,7 +25,7 @@ import {
     next,
     prev,
     resetState
-} from './lightningbox';
+} = require('./lightningbox');
 
 const CLASS = 'gallery';
 const SELECTOR = `.${ CLASS }`;

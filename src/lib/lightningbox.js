@@ -1,6 +1,5 @@
-import { addDOMElement, removeDOMElement, addClass, removeClass } from '../utils';
-import { arrowLeftSVG, arrowRightSVG, closeSVG } from '../svgs';
-import '../style.scss';
+const { addDOMElement, removeDOMElement, addClass, removeClass } = require('./utils');
+const { arrowLeftSVG, arrowRightSVG, closeSVG } = require('./svgs');
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
