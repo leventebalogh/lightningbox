@@ -10,13 +10,10 @@ const htmlWebpackPlugin = getHtmlWebpackPlugin();
 const extractSassPlugin = getExtractSassPlugin();
 
 module.exports = {
-    entry: {
-        lightningbox: path.resolve(__dirname, './src/targets/browser.js'),
-        example: path.resolve(__dirname, './src/example/index.js')
-    },
+    entry: path.resolve(__dirname, './src/targets/browser.js'),
     output: {
         path: BUILD_PATH,
-        filename: '[name].min.js'
+        filename: 'lightningbox.min.js'
     },
     module: {
         rules: [
@@ -47,13 +44,13 @@ function getHtmlWebpackPlugin () {
     return new HtmlWebpackPlugin({
         template: HTML_ENTRY_PATH,
         filename: 'index.html',
-        inject: true
+        inject: false
     });
 }
 
 function getExtractSassPlugin () {
     return new ExtractTextPlugin({
         filename: 'lightningbox.min.css',
-        disable: process.env.NODE_ENV === 'development'
+        disable: false
     });
 }
