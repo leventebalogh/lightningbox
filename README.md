@@ -1,6 +1,6 @@
 # Lightningbox
 
-![Desktop](screenshots/desktop-1.png "On desktop")
+![Lightningbox javascript image viewer](screenshots/screenshot.png "Lightningbox javascript image viewer")
 
 ## Usage
 ```html
