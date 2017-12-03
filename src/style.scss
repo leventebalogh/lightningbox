@@ -1,6 +1,15 @@
+$gutter: 20px !default;
+$color: white !default;
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$background: rgba(0, 0, 0, 0.7) !default;
+$nav-background: rgba(0, 0, 0, 0.6) !default;
+$pagination-background: rgba(0, 0, 0, 0.3) !default;
+$border-radius: 100px !default;
+$transition-time: .2s !default;
+
 .lb-modal {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    background: rgba(0, 0, 0, 0.7);
+    font-family: $font-family;
+    background: $background;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -18,9 +27,9 @@
     z-index: 5;
     opacity: 0.5;
     transform: scale(0.8);
-    background-color: rgba(0,0,0,0.6);
-    border-radius: 100px;
-    transition: opacity .2s;
+    background-color: $nav-background;
+    border-radius: $border-radius;
+    transition: opacity $transition-time;
 
     svg {
         transform: translate(-2px, 0);
@@ -41,7 +50,7 @@
     z-index: 5;
     cursor: pointer;
     transform: scale(0.8);
-    opacity: 0.5;
+    opacity: 0.8;
     transition: opacity .2s;
     user-select: none;
 
@@ -51,11 +60,11 @@
 }
 
 .lb-modal-next {
-    right: 20px;
+    right: $gutter;
 }
 
 .lb-modal-prev {
-    left: 20px;
+    left: $gutter;
 }
 
 .lb-modal-images {
@@ -83,11 +92,11 @@
 }
 
 .lb-modal-pagination {
-    background: rgba(0, 0, 0, 0.4);
+    background: $pagination-background;
     position: absolute;
-    top: 25px;
-    left: 20px;
-    color: white;
+    top: $gutter;
+    left: $gutter;
+    color: $color;
     font-size: 1.2rem;
     padding: 5px 15px;
     border-radius: 100px;
