@@ -13,11 +13,13 @@ const MODAL_IMAGE_ACTIVE_CLASS = 'lb-modal-image-active';
 const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
-
-let state = {
+const DEFAULT_STATE = {
+    isModalOpen: false,
     activeIndex: 0,
     activeElementsNumber: 0
 };
+
+let state = DEFAULT_STATE;
 
 module.exports = {
     MODAL_CLASS,
@@ -28,13 +30,19 @@ module.exports = {
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
 
+    lightningbox,
     getElements,
     registerCallbackOnElements,
     openModal,
     closeModal,
     next,
-    prev
+    prev,
+    resetState
 };
+
+function lightningbox (selector) {
+    registerCallbackOnElements(selector, openModal);
+}
 
 function getElements (selector) {
     return [...document.querySelectorAll(selector)];
@@ -53,11 +61,15 @@ function registerCallbackOnElements (selector, callback, event='click') {
 
 function openModal (element, elements=[]) {
     updateStateFromElements(element, elements);
-    addDOMElement(getModalHtml(element, elements));
+    setModalHTML(element, elements);
+
+    setState({ isModalOpen: true });
 }
 
 function closeModal () {
-    removeDOMElement(`.${ MODAL_CLASS }`)
+    removeDOMElement(`.${ MODAL_CLASS }`);
+
+    setState({ isModalOpen: false });
 }
 
 function next () {
@@ -74,8 +86,23 @@ function prev () {
     setState({ activeIndex: getPrevIndex() });
 }
 
+function resetState () {
+    state = extend({}, DEFAULT_STATE);
+}
+
 function setState (newState) {
     state = extend({}, state, newState);
+}
+
+function setModalHTML (element, elements) {
+    if (state.isModalOpen) {
+        const modalImages = document.querySelector(`.${ MODAL_IMAGES_CLASS }`);
+        const newImagesHTML = getImagesHtml(element, elements);
+
+        modalImages.innerHTML = newImagesHTML;
+    } else {
+        addDOMElement(getModalHtml(element, elements));
+    }
 }
 
 function updateStateFromElements (element, elements) {

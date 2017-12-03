@@ -16,16 +16,20 @@ const {
     MODAL_IMAGE_ACTIVE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
+
+    lightningbox,
     getElements,
     registerCallbackOnElements,
     openModal,
     closeModal,
     next,
-    prev
+    prev,
+    resetState
 } = require('./lightningbox');
 
 const CLASS = 'gallery';
 const SELECTOR = `.${ CLASS }`;
+const LINK_SELECTOR = `${ SELECTOR } > a`;
 const SAMPLE_HTML = `
 <div class="${ CLASS }">
     <a href="/images/1.jpg"><img src="/images/1-small.jpg" style="width: 200px;" /></a>
@@ -40,6 +44,24 @@ describe('LightningBox', () => {
         removeDOMElement(SELECTOR);
         removeDOMElement(`.${ MODAL_CLASS }`);
         addDOMElement(SAMPLE_HTML);
+        resetState();
+    });
+
+    describe('lightningbox()', () => {
+        beforeEach(() => lightningbox(LINK_SELECTOR));
+
+        it('should open a modal when clicking on an image', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+
+            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+        });
+
+        it('should not open a second modal', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+
+            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+        });
     });
 
     describe('getElements()', () => {
