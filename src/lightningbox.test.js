@@ -19,12 +19,14 @@ const {
     getElements,
     registerCallbackOnElements,
     openModal,
-    closeModal
+    closeModal,
+    next,
+    prev
 } = require('./lightningbox');
 
 const CLASS = 'gallery';
 const SELECTOR = `.${ CLASS }`;
-const HTML = `
+const SAMPLE_HTML = `
 <div class="${ CLASS }">
     <a href="/images/1.jpg"><img src="/images/1-small.jpg" style="width: 200px;" /></a>
     <a href="/images/2.jpg"><img src="/images/2-small.jpg" style="width: 200px;" /></a>
@@ -81,7 +83,7 @@ describe('LightningBox', () => {
         });
     });
 
-    describe('openModal', () => {
+    describe('openModal()', () => {
         it('should add a modal div to the body', () => {
             const elements = getElements('.gallery a');
             const [element] = elements;
@@ -118,7 +120,7 @@ describe('LightningBox', () => {
         });
     });
 
-    describe('closeModal', () => {
+    describe('closeModal()', () => {
         it('should remove the modal from the dom', () => {
             const elements = getElements('.gallery a');
             const [element] = elements;
@@ -129,4 +131,46 @@ describe('LightningBox', () => {
             expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(0);
         });
     });
+
+    describe('next()', () => {
+        it('should show the next image', () => {
+            const images = getElements('.gallery a');
+            const [image, secondImage, thirdImage] = images;
+            const url = image.getAttribute('href');
+            const secondUrl = secondImage.getAttribute('href');
+            const thirdUrl = thirdImage.getAttribute('href');
+            const selector = `.${ MODAL_IMAGE_ACTIVE_CLASS }`;
+
+            openModal(image, images);
+            shouldHaveActiveUrl(url);
+            next();
+            shouldHaveActiveUrl(secondUrl);
+            next();
+            shouldHaveActiveUrl(thirdImage);
+        });
+    });
+
+    describe('prev()', () => {
+        it('should show the previous image', () => {
+            const images = getElements('.gallery a');
+            const [firstImage, secondImage, thirdImage] = images;
+            const firstUrl = firstImage.getAttribute('href');
+            const secondUrl = secondImage.getAttribute('href');
+            const thirdUrl = thirdImage.getAttribute('href');
+            const selector = `.${ MODAL_IMAGE_ACTIVE_CLASS }`;
+
+            openModal(thirdImage, images);
+            shouldHaveActiveUrl(thirdUrl);
+            prev();
+            shouldHaveActiveUrl(secondUrl);
+            prev();
+            shouldHaveActiveUrl(firstUrl);
+        });
+    });
 });
+
+function shouldHaveActiveUrl (url) {
+    const selector = `.${ MODAL_IMAGE_ACTIVE_CLASS }`;
+
+    expect(getStyle(selector)).to.contain(`background-image: url('${ url }')`);
+}

@@ -1,5 +1,10 @@
 const extend = require('lodash/extend');
-const { addElement, removeElement } = require('./utils');
+const {
+    addDOMElement,
+    removeDOMElement,
+    addClass,
+    removeClass
+} = require('./utils');
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
@@ -9,6 +14,11 @@ const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
 
+let state = {
+    activeIndex: 0,
+    activeElementsNumber: 0
+};
+
 module.exports = {
     MODAL_CLASS,
     MODAL_IMAGE_CLASS,
@@ -17,11 +27,18 @@ module.exports = {
     MODAL_CLOSE_CLASS,
     MODAL_NEXT_CLASS,
     MODAL_PREV_CLASS,
+
     getElements,
     registerCallbackOnElements,
     openModal,
-    closeModal
+    closeModal,
+    next,
+    prev
 };
+
+function getElements (selector) {
+    return [...document.querySelectorAll(selector)];
+}
 
 function registerCallbackOnElements (selector, callback, event='click') {
     const elements = getElements(selector);
@@ -34,18 +51,84 @@ function registerCallbackOnElements (selector, callback, event='click') {
     }
 }
 
-function getElements (selector) {
-    return document.querySelectorAll(selector);
-}
-
 function openModal (element, elements=[]) {
-    const html = getModalHtml(element, elements);
-
-    addElement(html);
+    updateStateFromElements(element, elements);
+    addDOMElement(getModalHtml(element, elements));
 }
 
 function closeModal () {
-    removeElement(`.${ MODAL_CLASS }`)
+    removeDOMElement(`.${ MODAL_CLASS }`)
+}
+
+function next () {
+    removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
+    addClass(getNextElement(), MODAL_IMAGE_ACTIVE_CLASS);
+
+    setState({ activeIndex: getNextIndex() });
+}
+
+function prev () {
+    removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
+    addClass(getPrevElement(), MODAL_IMAGE_ACTIVE_CLASS);
+
+    setState({ activeIndex: getPrevIndex() });
+}
+
+function setState (newState) {
+    state = extend({}, state, newState);
+}
+
+function updateStateFromElements (element, elements) {
+    if (elements.length) {
+        setState({
+            activeIndex: elements.indexOf(element),
+            activeElementsNumber: elements.length
+        });
+    }
+}
+
+function getActiveElement () {
+    return document.querySelector(`.${ MODAL_IMAGE_ACTIVE_CLASS }`);
+}
+
+function getNextElement () {
+    const index = getNextIndex();
+    const childNumber = index + 1;
+    const nextElement = document.querySelector(`.${ MODAL_IMAGE_CLASS }:nth-child(${ childNumber })`);
+
+    return nextElement;
+}
+
+function getPrevElement () {
+    const index = getPrevIndex();
+    const childNumber = index + 1;
+    const prevElement = document.querySelector(`.${ MODAL_IMAGE_CLASS }:nth-child(${ childNumber })`);
+
+    return prevElement;
+}
+
+function getNextIndex () {
+    const index = state.activeIndex + 1;
+    const wasLastElement = index === state.activeElementsNumber;
+    const firstIndex = 0;
+
+    if (wasLastElement) {
+        return firstIndex;
+    }
+
+    return index;
+}
+
+function getPrevIndex () {
+    const index = state.activeIndex - 1;
+    const wasFirstElement = index < 0;
+    const lastIndex = state.activeElementsNumber - 1;
+
+    if (wasFirstElement) {
+        return lastIndex;
+    }
+
+    return index;
 }
 
 function getModalHtml (element, elements) {
