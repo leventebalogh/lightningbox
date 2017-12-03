@@ -7,7 +7,7 @@ import {
     dispatchEvent,
     getHtml,
     getStyle
-} from './utils';
+} from '../utils';
 import {
     MODAL_CLASS,
     MODAL_CLOSE_CLASS,

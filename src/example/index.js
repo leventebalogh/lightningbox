@@ -1,3 +1,3 @@
-import { lightningbox } from '../lightningbox';
+import { lightningbox } from '../lib/lightningbox';
 
 lightningbox('.gallery > a');
