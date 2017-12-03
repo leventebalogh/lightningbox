@@ -10,6 +10,7 @@ const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
 const MODAL_IMAGES_CLASS = 'lb-modal-images';
 const MODAL_IMAGE_ACTIVE_CLASS = 'lb-modal-image-active';
+const MODAL_PAGINATION_CLASS = 'lb-modal-pagination';
 const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
@@ -85,15 +86,15 @@ function closeModal () {
 function next () {
     removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
     addClass(getNextElement(), MODAL_IMAGE_ACTIVE_CLASS);
-
     setState({ activeIndex: getNextIndex() });
+    updatePagination();
 }
 
 function prev () {
     removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
     addClass(getPrevElement(), MODAL_IMAGE_ACTIVE_CLASS);
-
     setState({ activeIndex: getPrevIndex() });
+    updatePagination();
 }
 
 function resetState () {
@@ -203,8 +204,19 @@ function getModalHtml (element, elements) {
         </div>
         <div class="${ MODAL_NEXT_CLASS }">${ getArrowLeftSVG() }</div>
         <div class="${ MODAL_PREV_CLASS }">${ getArrowRightSVG() }</div>
+        <div class="${ MODAL_PAGINATION_CLASS }">${ getPagination() }</div>
     </div>
     `;
+}
+
+function updatePagination () {
+    const pagination = document.querySelector(`.${ MODAL_PAGINATION_CLASS }`);
+
+    pagination.innerHTML = getPagination();
+}
+
+function getPagination () {
+    return `${ state.activeIndex + 1 }<span>/</span>${ state.activeElementsNumber }`;
 }
 
 function getImagesHtml (element, elements) {
