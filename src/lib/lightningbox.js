@@ -1,9 +1,5 @@
-import {
-    addDOMElement,
-    removeDOMElement,
-    addClass,
-    removeClass
-} from '../utils';
+import { addDOMElement, removeDOMElement, addClass, removeClass } from '../utils';
+import { arrowLeftSVG, arrowRightSVG, closeSVG } from '../svgs';
 import '../style.scss';
 
 const MODAL_CLASS = 'lb-modal';
@@ -14,8 +10,7 @@ const MODAL_PAGINATION_CLASS = 'lb-modal-pagination';
 const MODAL_CLOSE_CLASS = 'lb-modal-close';
 const MODAL_NEXT_CLASS = 'lb-modal-next';
 const MODAL_PREV_CLASS = 'lb-modal-prev';
-const ICON_SIZE = 64;
-const ICON_COLOR = '#ffffff';
+
 const DEFAULT_STATE = {
     isModalOpen: false,
     activeIndex: 0,
@@ -198,12 +193,12 @@ function getPrevIndex () {
 function getModalHtml (element, elements) {
     return `
     <div class="${ MODAL_CLASS }">
-        <div class="${ MODAL_CLOSE_CLASS }">${ getCloseSVG() }</div>
+        <div class="${ MODAL_CLOSE_CLASS }">${ closeSVG }</div>
         <div class="${ MODAL_IMAGES_CLASS }">
             ${ getImagesHtml(element, elements) }
         </div>
-        <div class="${ MODAL_NEXT_CLASS }">${ getArrowLeftSVG() }</div>
-        <div class="${ MODAL_PREV_CLASS }">${ getArrowRightSVG() }</div>
+        <div class="${ MODAL_NEXT_CLASS }">${ arrowLeftSVG }</div>
+        <div class="${ MODAL_PREV_CLASS }">${ arrowRightSVG }</div>
         <div class="${ MODAL_PAGINATION_CLASS }">${ getPagination() }</div>
     </div>
     `;
@@ -232,25 +227,4 @@ function getImageHtml (element, isActive=false) {
     const activeClass = isActive ? MODAL_IMAGE_ACTIVE_CLASS : '';
 
     return `<div class="${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
-}
-
-function getArrowLeftSVG () {
-    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE }px" height="${ ICON_SIZE }px" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
-            <g><polyline fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" points="27,15 44,32 27,49"/></g>
-            <g><circle fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" cx="${ ICON_SIZE / 2 }" cy="${ ICON_SIZE / 2 }" r="30.999"/></g>
-            </svg>`;
-}
-
-function getArrowRightSVG () {
-    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE}px" height="${ ICON_SIZE}px" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
-            <g><polyline fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-linejoin="bevel" stroke-miterlimit="10" points="37,15 20,32 37,49 "/></g>
-            <g><circle fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" cx="${ ICON_SIZE / 2 }" cy="${ ICON_SIZE / 2 }" r="30.999"/></g>
-            </svg>`;
-}
-
-function getCloseSVG () {
-    return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${ ICON_SIZE }" height="${ ICON_SIZE }" viewBox="0 0 ${ ICON_SIZE } ${ ICON_SIZE }" enable-background="new 0 0 ${ ICON_SIZE } ${ ICON_SIZE }" xml:space="preserve">
-            <g><line fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" x1="18.947" y1="17.153" x2="45.045" y2="43.056"/></g>
-            <g><line fill="none" stroke="${ ICON_COLOR }" stroke-width="2" stroke-miterlimit="10" x1="19.045" y1="43.153" x2="44.947" y2="17.056"/></g>
-            </svg>`;
 }
