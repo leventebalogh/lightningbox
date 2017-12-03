@@ -1,3 +1,5 @@
+![Travis Build](https://travis-ci.org/leventebalogh/lightningbox.svg?branch=master "Travis Build")
+
 # Lightningbox
 
 A small and blazing fast vanilla javascript image viewer.
