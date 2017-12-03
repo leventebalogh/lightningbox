@@ -10,10 +10,15 @@ const htmlWebpackPlugin = getHtmlWebpackPlugin();
 const extractSassPlugin = getExtractSassPlugin();
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/targets/browser.js'),
+    entry: {
+        'lightningbox': path.resolve(__dirname, './src/targets/browser.js'),
+        'lightningbox.umd': path.resolve(__dirname, './src/targets/commonjs.js')
+    },
     output: {
         path: BUILD_PATH,
-        filename: 'lightningbox.min.js'
+        filename: '[name].min.js',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         rules: [

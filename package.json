@@ -2,7 +2,7 @@
   "name": "lightningbox",
   "version": "1.0.0",
   "description": "A small and blazing fast vanilla javascript image viewer.",
-  "main": "src/targets/commonjs.js",
+  "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js",
     "build": "rm -rf ./build && webpack --config webpack.config.js",
