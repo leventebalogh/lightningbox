@@ -1,6 +1,8 @@
 # Lightningbox
 
-![Lightningbox javascript image viewer](screenshots/screenshot.png "Lightningbox javascript image viewer")
+A small and blazing fast vanilla javascript image viewer.
+
+![Lightningbox - A small and blazing fast vanilla javascript image viewer.](screenshots/screenshot.png "Lightningbox - A small and blazing fast vanilla javascript image viewer.")
 
 ## Usage
 ```html
