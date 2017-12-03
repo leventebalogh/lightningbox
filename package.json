@@ -9,8 +9,18 @@
     "test": "mocha --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
     "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\""
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Levente Balogh <balogh.levente.hu@gmail.com>",
+  "keywords": ["lightbox", "gallery", "javascript", "vanilla-javascript"],
+  "homepage": "https://lightningbox.leventebalogh.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leventebalogh/lightningbox.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url" : "https://github.com/leventebalogh/lightningbox/issues",
+    "email" : "bugs@leventebalogh.com"
+  },
   "dependencies": {
   },
   "devDependencies": {
