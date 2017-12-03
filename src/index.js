@@ -1,4 +1,3 @@
-const _ = require('lodash');
-const { lightningbox } = require('./lightningbox');
+import { lightningbox } from './lightningbox';
 
 lightningbox('.gallery > img');

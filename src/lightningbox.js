@@ -1,10 +1,10 @@
-const extend = require('lodash/extend');
-const {
+import extend from 'lodash/extend';
+import {
     addDOMElement,
     removeDOMElement,
     addClass,
     removeClass
-} = require('./utils');
+} from './utils';
 
 const MODAL_CLASS = 'lb-modal';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
