@@ -56,7 +56,7 @@ describe('LightningBox', () => {
             expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
         });
 
-        it('should not open a second modal', () => {
+        it('should not open the modal more than once', () => {
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
 
