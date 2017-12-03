@@ -5,8 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const BUILD_PATH = path.resolve(__dirname, './build');
-const JS_ENTRY_PATH = path.resolve(__dirname, './src/index.js');
-const HTML_ENTRY_PATH = path.resolve(__dirname, './src/index.html');
+const JS_ENTRY_PATH = path.resolve(__dirname, './src/example/index.js');
+const HTML_ENTRY_PATH = path.resolve(__dirname, './src/example/index.html');
 const htmlWebpackPlugin = getHtmlWebpackPlugin();
 const extractSassPlugin = getExtractSassPlugin();
 
@@ -35,7 +35,7 @@ module.exports = {
         htmlWebpackPlugin,
         extractSassPlugin,
         new CopyWebpackPlugin([
-            { from: 'images', to: 'images' }
+            { from: 'src/example/images', to: 'images' }
         ]),
         new UglifyJsPlugin()
     ]
