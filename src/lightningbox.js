@@ -1,4 +1,5 @@
 import extend from 'lodash/extend';
+import debounce from 'lodash/debounce';
 import {
     addDOMElement,
     removeDOMElement,
@@ -79,14 +80,13 @@ function openModal (element, elements=[]) {
 
 function closeModal () {
     removeDOMElement(`.${ MODAL_CLASS }`);
+    removeEventListeners();
     setState({ isModalOpen: false });
 }
 
 function next () {
-    console.log('NEXT');
     removeClass(getActiveElement(), MODAL_IMAGE_ACTIVE_CLASS);
     addClass(getNextElement(), MODAL_IMAGE_ACTIVE_CLASS);
-    console.log('NEXT LOADED');
 
     setState({ activeIndex: getNextIndex() });
 }
@@ -110,6 +110,37 @@ function addEventListeners () {
     registerCallbackOnElements(`.${ MODAL_CLOSE_CLASS }`, closeModal, 'click');
     registerCallbackOnElements(`.${ MODAL_NEXT_CLASS }`, next, 'click');
     registerCallbackOnElements(`.${ MODAL_PREV_CLASS }`, prev, 'click');
+    addKeyEventListeners();
+}
+
+function removeEventListeners () {
+    removeKeyEventListeners();
+}
+
+function addKeyEventListeners () {
+    document.addEventListener('keyup', debounce(onKeyup, 50));
+}
+
+function removeKeyEventListeners () {
+    document.removeEventListener('keyup', onKeyup);
+}
+
+function onKeyup (e) {
+    const isRightArrow = e.keyCode == 39;
+    const isLeftArrow = e.keyCode == 37;
+    const isEsc = e.keyCode == 27;
+
+    if (isRightArrow) {
+        next();
+    }
+
+    if (isLeftArrow) {
+        prev();
+    }
+
+    if (isEsc) {
+        closeModal();
+    }
 }
 
 function setStateFromElements (element, elements) {
