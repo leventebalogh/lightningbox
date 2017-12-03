@@ -1,5 +1,3 @@
-import extend from 'lodash/extend';
-import debounce from 'lodash/debounce';
 import {
     addDOMElement,
     removeDOMElement,
@@ -99,11 +97,11 @@ function prev () {
 }
 
 function resetState () {
-    state = extend({}, DEFAULT_STATE);
+    state = { ...DEFAULT_STATE };
 }
 
 function setState (newState) {
-    state = extend({}, state, newState);
+    state = { ...state, ...newState };
 }
 
 function addEventListeners () {
@@ -118,7 +116,7 @@ function removeEventListeners () {
 }
 
 function addKeyEventListeners () {
-    document.addEventListener('keyup', debounce(onKeyup, 50));
+    document.addEventListener('keyup', onKeyup);
 }
 
 function removeKeyEventListeners () {
