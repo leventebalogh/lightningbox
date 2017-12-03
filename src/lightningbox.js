@@ -60,8 +60,9 @@ function registerCallbackOnElements (selector, callback, event='click') {
 }
 
 function openModal (element, elements=[]) {
-    updateStateFromElements(element, elements);
+    setStateFromElements(element, elements);
     setModalHTML(element, elements);
+    addEventListeners();
 
     setState({ isModalOpen: true });
 }
@@ -94,6 +95,12 @@ function setState (newState) {
     state = extend({}, state, newState);
 }
 
+function addEventListeners () {
+    registerCallbackOnElements(`.${ MODAL_CLOSE_CLASS }`, closeModal, 'click');
+    registerCallbackOnElements(`.${ MODAL_NEXT_CLASS }`, next, 'click');
+    registerCallbackOnElements(`.${ MODAL_PREV_CLASS }`, prev, 'click');
+}
+
 function setModalHTML (element, elements) {
     if (state.isModalOpen) {
         const modalImages = document.querySelector(`.${ MODAL_IMAGES_CLASS }`);
@@ -105,7 +112,7 @@ function setModalHTML (element, elements) {
     }
 }
 
-function updateStateFromElements (element, elements) {
+function setStateFromElements (element, elements) {
     if (elements.length) {
         setState({
             activeIndex: elements.indexOf(element),

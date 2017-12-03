@@ -53,14 +53,41 @@ describe('LightningBox', () => {
         it('should open a modal when clicking on an image', () => {
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
 
-            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+            shouldHaveModalOpen();
         });
 
         it('should not open the modal more than once', () => {
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
 
-            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+            shouldHaveModalOpen(); // checks for 1 modal
+        });
+
+        it('should show the first image', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+
+            shouldHaveActiveUrl('/images/1.jpg');
+        });
+
+        it('should show the next image when clicking on next', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+            dispatchEvent(`.${ MODAL_NEXT_CLASS }`, 'click');
+
+            shouldHaveActiveUrl('/images/2.jpg');
+        });
+
+        it('should show the previous image when clicking on prev', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+            dispatchEvent(`.${ MODAL_PREV_CLASS }`, 'click');
+
+            shouldHaveActiveUrl('/images/4.jpg');
+        });
+
+        it('should close the modal when clicking on close', () => {
+            dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
+            dispatchEvent(`.${ MODAL_CLOSE_CLASS }`, 'click');
+
+            shouldNotHaveModalOpen();
         });
     });
 
@@ -112,7 +139,7 @@ describe('LightningBox', () => {
 
             openModal(element, elements);
 
-            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+            shouldHaveModalOpen();
             expect(getElements(`.${ MODAL_CLOSE_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
             expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
@@ -150,7 +177,7 @@ describe('LightningBox', () => {
             openModal(element, elements);
             closeModal();
 
-            expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(0);
+            shouldNotHaveModalOpen();
         });
     });
 
@@ -190,6 +217,14 @@ describe('LightningBox', () => {
         });
     });
 });
+
+function shouldHaveModalOpen (params) {
+    expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(1);
+}
+
+function shouldNotHaveModalOpen (params) {
+    expect(getElements(`.${ MODAL_CLASS }`)).to.have.lengthOf(0);
+}
 
 function shouldHaveActiveUrl (url) {
     const selector = `.${ MODAL_IMAGE_ACTIVE_CLASS }`;
