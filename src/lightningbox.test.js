@@ -2,8 +2,8 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 const {
     createFromHtmlString,
-    addElement,
-    removeElement,
+    addDOMElement,
+    removeDOMElement,
     dispatchEvent,
     getHtml,
     getStyle
@@ -35,9 +35,9 @@ const HTML = `
 
 describe('LightningBox', () => {
     beforeEach(() => {
-        removeElement(SELECTOR);
-        removeElement(`.${ MODAL_CLASS }`);
-        addElement(HTML);
+        removeDOMElement(SELECTOR);
+        removeDOMElement(`.${ MODAL_CLASS }`);
+        addDOMElement(SAMPLE_HTML);
     });
 
     describe('getElements()', () => {

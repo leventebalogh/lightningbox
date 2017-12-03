@@ -1,7 +1,7 @@
 module.exports = {
     createFromHtmlString,
-    addElement,
-    removeElement,
+    addDOMElement,
+    removeDOMElement,
     dispatchEvent,
     getHtml,
     getStyle,
@@ -22,13 +22,13 @@ function createFromHtmlString (html) {
     return fragment;
 }
 
-function addElement (html) {
+function addDOMElement (html) {
     const element = createFromHtmlString(html);
 
     document.body.appendChild(element);
 }
 
-function removeElement (selector) {
+function removeDOMElement (selector) {
     const element = document.querySelector(selector);
 
     if (element) {
