@@ -94,8 +94,9 @@ $transition-time: .2s !default;
 .lb-modal-pagination {
     background: $pagination-background;
     position: absolute;
-    top: $gutter;
-    left: $gutter;
+    bottom: $gutter;
+    left: 50%;
+    transform: translate(-50%, 0);
     color: $color;
     font-size: 1.2rem;
     padding: 5px 15px;
