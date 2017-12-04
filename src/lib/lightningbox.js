@@ -2,6 +2,8 @@ const { addDOMElement, removeDOMElement, addClass, removeClass } = require('./ut
 const { arrowLeftSVG, arrowRightSVG, closeSVG } = require('./svgs');
 
 const MODAL_CLASS = 'lb-modal';
+const MODAL_BODY_CLASS = 'lb-modal-is-open';
+const MODAL_FIT_CLASS = 'lb-absolute-fit';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
 const MODAL_IMAGES_CLASS = 'lb-modal-images';
 const MODAL_IMAGE_ACTIVE_CLASS = 'lb-modal-image-active';
@@ -20,6 +22,8 @@ let state = DEFAULT_STATE;
 
 module.exports = {
     MODAL_CLASS,
+    MODAL_BODY_CLASS,
+    MODAL_FIT_CLASS,
     MODAL_IMAGE_CLASS,
     MODAL_IMAGES_CLASS,
     MODAL_IMAGE_ACTIVE_CLASS,
@@ -65,6 +69,7 @@ function openModal (element, elements=[]) {
         return;
     }
 
+    addClass(document.body, MODAL_BODY_CLASS);
     setState({ isModalOpen: true });
     setStateFromElements(element, elements);
     addDOMElement(getModalHtml(element, elements));
@@ -72,6 +77,7 @@ function openModal (element, elements=[]) {
 }
 
 function closeModal () {
+    removeClass(document.body, MODAL_BODY_CLASS);
     removeDOMElement(`.${ MODAL_CLASS }`);
     removeEventListeners();
     setState({ isModalOpen: false });
@@ -193,7 +199,7 @@ function getModalHtml (element, elements) {
     return `
     <div class="${ MODAL_CLASS }">
         <div class="${ MODAL_CLOSE_CLASS }">${ closeSVG }</div>
-        <div class="${ MODAL_IMAGES_CLASS }">
+        <div class="${ MODAL_FIT_CLASS } ${ MODAL_IMAGES_CLASS }">
             ${ getImagesHtml(element, elements) }
         </div>
         <div class="${ MODAL_NEXT_CLASS }">${ arrowLeftSVG }</div>
@@ -225,5 +231,5 @@ function getImageHtml (element, isActive=false) {
     const imageUrl = element.getAttribute('href');
     const activeClass = isActive ? MODAL_IMAGE_ACTIVE_CLASS : '';
 
-    return `<div class="${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
+    return `<div class="${ MODAL_FIT_CLASS } ${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
 }
