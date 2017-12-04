@@ -7,19 +7,145 @@
     <title>Lightningbox</title>
     <link href="lightningbox.min.css" rel="stylesheet"></head>
     <script type="text/javascript" src="lightningbox.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1.1rem;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .container {
+            max-width: 1005px;
+            width: 92%;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section {
+            position: relative;
+            margin-top: 50px;
+        }
+        .section:first-child {
+            margin-top: 10px;
+        }
+
+
+        .github-buttons {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+
+        code, pre {
+            background-color: #e9e9e9;
+            width: 100%;
+            display: inline-block;
+            box-sizing: border-box;
+            padding: 10px;
+            border-radius: 3px;
+            overflow: auto;
+        }
+
+        .gallery {
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            margin-bottom: 5px;
+            float: left;
+        }
+
+        .gallery img:nth-child(3n+3) {
+            margin-right: 0px;
+        }
+
+        @media (min-width: 600px) {
+            .gallery img {
+                width: 330px;
+                margin-right: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="section">
+            <h1>Lightningbox</h1>
+            <p>Super small, only <strong>6.2kB (2.1kB gzipped)</strong>.</p>
+            <p>A small and blazing fast vanilla javascript image viewer.</p>
+            <div class="github-buttons">
+                <a class="github-button" href="https://github.com/leventebalogh/lightningbox" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star leventebalogh/lightningbox on GitHub">Star</a>
+                <a class="github-button" href="https://github.com/leventebalogh/lightningbox/fork" data-icon="octicon-repo-forked" data-size="large" data-show-count="true" aria-label="Fork leventebalogh/lightningbox on GitHub">Fork</a>
+            </div>
+        </div>
 
-    <!-- Single image -->
-    <div class="gallery">
-        <a href="/images/1.jpg"><img src="/images/1.jpg" style="width: 200px;" /></a>
-        <a href="/images/2.jpg"><img src="/images/2.jpg" style="width: 200px;" /></a>
-        <a href="/images/3.jpg"><img src="/images/3.jpg" style="width: 200px;" /></a>
-        <a href="/images/4.jpg"><img src="/images/4.jpg" style="width: 200px;" /></a>
+        <div class="section">
+            <h2>Why?</h2>
+            <p>It is easy to setup, super small, fast and has no dependencies.</p>
+        </div>
+
+        <div class="section">
+            <h2>Single Image</h2>
+
+<pre>
+// javascript
+lightningbox('.gallery-single > a');
+
+// html
+&lt;div class="gallery-multiple"&gt;
+    &lt;a href="/images/1.jpg"&gt;&lt;img src="/images/1.jpg" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+            <div class="gallery gallery-single">
+                <a href="/images/2.jpg"><img src="/images/2.jpg" /></a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Multiple Images</h2>
+
+<pre>
+// javascript
+lightningbox('.gallery-multiple > a');
+
+// html
+&lt;div class="gallery-multiple"&gt;
+    &lt;a href="/images/1.jpg"&gt;&lt;img src="/images/1.jpg" /&gt;&lt;/a&gt;
+    &lt;a href="/images/2.jpg"&gt;&lt;img src="/images/2.jpg" /&gt;&lt;/a&gt;
+    &lt;a href="/images/3.jpg"&gt;&lt;img src="/images/3.jpg" /&gt;&lt;/a&gt;
+    &lt;a href="/images/4.jpg"&gt;&lt;img src="/images/4.jpg" /&gt;&lt;/a&gt;
+    &lt;a href="/images/5.jpg"&gt;&lt;img src="/images/5.jpg" /&gt;&lt;/a&gt;
+    &lt;a href="/images/6.jpg"&gt;&lt;img src="/images/6.jpg" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+</pre>
+
+            <div class="gallery gallery-multiple">
+                <a href="/images/1.jpg"><img src="/images/1.jpg" /></a>
+                <a href="/images/2.jpg"><img src="/images/2.jpg" /></a>
+                <a href="/images/3.jpg"><img src="/images/3.jpg" /></a>
+                <a href="/images/4.jpg"><img src="/images/4.jpg" /></a>
+                <a href="/images/5.jpg"><img src="/images/5.jpg" /></a>
+                <a href="/images/6.jpg"><img src="/images/6.jpg" /></a>
+            </div>
+        </div>
+
+        <div class="section">
+            <p><a href="https://github.com/leventebalogh/lightningbox" title="Lightningbox">Check it out on Github.</a></p>
+        </div>
     </div>
 
     <script>
-        lightningbox('.gallery > a');
+        lightningbox('.gallery-single > a');
+        lightningbox('.gallery-multiple > a');
     </script>
 </body>
 </html>
