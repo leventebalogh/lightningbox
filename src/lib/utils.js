@@ -5,6 +5,7 @@ module.exports = {
     dispatchEvent,
     getHtml,
     getStyle,
+    getAnimationEndEventName,
     addClass,
     removeClass
 };
@@ -66,6 +67,22 @@ function getStyle (selector) {
     }
 
     return null;
+}
+
+function getAnimationEndEventName() {
+    const fakeElement = document.createElement('fakeelement');
+    const animations = {
+        'animation': 'animationend',
+        'OAnimation': 'oAnimationEnd',
+        'MozAnimation': 'animationend',
+        'WebkitAnimation': 'webkitAnimationEnd'
+    };
+
+    for (let animation in animations) {
+        if (fakeElement.style[animation] !== undefined) {
+            return animations[animation];
+        }
+    }
 }
 
 function addClass (element, className) {

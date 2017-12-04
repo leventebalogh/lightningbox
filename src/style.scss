@@ -110,3 +110,37 @@ $transition-time: .2s !default;
         padding: 0 3px;
     }
 }
+
+.lb-anim-in {
+    animation-name: lb-anim-in;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+.lb-anim-out {
+    animation-name: lb-anim-out;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes lb-anim-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes lb-anim-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
