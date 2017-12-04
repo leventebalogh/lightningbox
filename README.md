@@ -13,6 +13,7 @@ $ npm install --save lightningbox
 
 ## Usage
 **API**
+
 The `lightningbox` function only takes a single selector which has to point on a single or multiple `<a>` elements.
 If there are multiple elements matching the selector the gallery view will be used automatically.
 
@@ -22,9 +23,7 @@ import lightningbox from 'lightningbox';
 
 lightningbox('.gallery > a');
 ```
-<br>
-<br>
-**HTML**
+
 ```html
 <div class="gallery">
     <a href="/images/1.jpg" title="Foo"><img src="/images/1-small.jpg" alt="Foo" /></a>
