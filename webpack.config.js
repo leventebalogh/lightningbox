@@ -4,17 +4,21 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const BUILD_PATH = path.resolve(__dirname, './build');
-const JS_ENTRY_PATH = path.resolve(__dirname, './src/index.js');
-const HTML_ENTRY_PATH = path.resolve(__dirname, './src/index.html');
+const BUILD_PATH = path.resolve(__dirname, './dist');
+const HTML_ENTRY_PATH = path.resolve(__dirname, './src/example/index.html');
 const htmlWebpackPlugin = getHtmlWebpackPlugin();
 const extractSassPlugin = getExtractSassPlugin();
 
 module.exports = {
-    entry: JS_ENTRY_PATH,
+    entry: {
+        'lightningbox': path.resolve(__dirname, './src/targets/browser.js'),
+        'lightningbox.umd': path.resolve(__dirname, './src/targets/commonjs.js')
+    },
     output: {
         path: BUILD_PATH,
-        filename: 'build.[chunkhash].js'
+        filename: '[name].min.js',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         rules: [
@@ -35,7 +39,7 @@ module.exports = {
         htmlWebpackPlugin,
         extractSassPlugin,
         new CopyWebpackPlugin([
-            { from: 'images', to: 'images' }
+            { from: 'src/example/images', to: 'images' }
         ]),
         new UglifyJsPlugin()
     ]
@@ -45,13 +49,13 @@ function getHtmlWebpackPlugin () {
     return new HtmlWebpackPlugin({
         template: HTML_ENTRY_PATH,
         filename: 'index.html',
-        inject: true
+        inject: false
     });
 }
 
 function getExtractSassPlugin () {
     return new ExtractTextPlugin({
-        filename: '[name].[contenthash].css',
-        disable: process.env.NODE_ENV === 'development'
+        filename: 'lightningbox.min.css',
+        disable: false
     });
 }
