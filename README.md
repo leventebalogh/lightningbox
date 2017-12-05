@@ -2,7 +2,7 @@
 
 # Lightningbox
 
-A small (**2.1kB gzipped**) and blazing fast vanilla javascript image viewer. [View Demo](https://lightningbox.leventebalogh.com)
+A small (**2.2kB gzipped**) and blazing fast vanilla javascript image viewer. [View Demo](https://lightningbox.leventebalogh.com)
 
 ![Lightningbox - A small and blazing fast vanilla javascript image viewer.](screenshots/screenshot.png "Lightningbox - A small and blazing fast vanilla javascript image viewer.")
 

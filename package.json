@@ -7,7 +7,8 @@
     "dev": "webpack-dev-server --config webpack.config.js",
     "build": "rm -rf ./build && webpack --config webpack.config.js",
     "test": "mocha --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
-    "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\""
+    "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
+    "bundle-size": "gzip -c dist/lightningbox.min.js | wc -c"
   },
   "author": "Levente Balogh <balogh.levente.hu@gmail.com>",
   "keywords": [
