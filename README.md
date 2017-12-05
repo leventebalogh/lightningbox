@@ -111,15 +111,15 @@ Just use the following code to make `window.lightningbox` available on your site
 
 ## Development
 ```bash
-# Run Webpack
+# Run webpack-dev-server and example page on http://localhost:8080/
 $ yarn dev
 
-# Create production build
+# Run a production build
 $ yarn build
 
 # Run the tests
 $ yarn test
 
-# Play TDD
+# Play some TDD!
 $ yarn tdd
 ```
