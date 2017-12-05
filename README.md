@@ -1,4 +1,5 @@
 ![Travis Build](https://travis-ci.org/leventebalogh/lightningbox.svg?branch=master "Travis Build")
+[![npm version](https://badge.fury.io/js/lightningbox.svg)](https://badge.fury.io/js/lightningbox)
 
 # Lightningbox
 
