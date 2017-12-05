@@ -1,6 +1,6 @@
 {
   "name": "lightningbox",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A small and blazing fast vanilla javascript image viewer.",
   "main": "index.js",
   "scripts": {
