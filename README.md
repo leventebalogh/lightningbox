@@ -18,6 +18,10 @@ $ npm install --save lightningbox
 * Takes a selector and initialises the image-viewer for the matched element(s).
 * The selector needs to point to a single or multiple <a> elements.
 * Whenever the <a> elements are clicked the image-viewer will open.
+* Required <a> parameters:
+*
+*    href="..." => the URL of the image that will be displayed in the modal
+*
 * @param {string} selector The selector of the <a> element(s)
 */
 function lightningbox (selector) {
@@ -72,6 +76,7 @@ lightningbox('.gallery > a');
 ```
 
 **Using NPM**
+
 The `lightningbox` module exposes the `lightningbox()` function only which you can start using right away.
 ```javascript
 import lightningbox from 'lightningbox';
@@ -80,10 +85,11 @@ lightningbox('.gallery > a');
 ```
 
 **Styling**
+
 You can either use the compiled `lightningbox.min.css` file or you can require in the SASS file from
 `node_modules/lightningbox/src/style.scss`.
 
-Available SASS variables:
+Customizable SASS variables:
 ```
 $gutter                 // The default spacing used
 $color                  // Text color
