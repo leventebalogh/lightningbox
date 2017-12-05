@@ -196,11 +196,21 @@ function getModalHtml (element, elements) {
         <div class="${ MODAL_IMAGES_CLASS }">
             ${ getImagesHtml(element, elements) }
         </div>
-        <div class="${ MODAL_NEXT_CLASS }">${ arrowLeftSVG }</div>
-        <div class="${ MODAL_PREV_CLASS }">${ arrowRightSVG }</div>
+        ${ getNavHtml(elements) }
         <div class="${ MODAL_PAGINATION_CLASS }">${ getPagination() }</div>
     </div>
     `;
+}
+
+function getNavHtml (elements) {
+    if (elements && elements.length > 1) {
+        return `
+            <div class="${ MODAL_NEXT_CLASS }">${ arrowLeftSVG }</div>
+            <div class="${ MODAL_PREV_CLASS }">${ arrowRightSVG }</div>
+        `;
+    }
+
+    return '';
 }
 
 function updatePagination () {

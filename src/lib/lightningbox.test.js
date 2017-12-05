@@ -167,6 +167,26 @@ describe('LightningBox', () => {
             const html = getHtml(selector);
             elements.forEach(element => expect(html).to.contain(element.getAttribute('href')));
         });
+
+        it('should NOT display navigation arrows if there is only 1 image', () => {
+            const elements = getElements('.gallery a');
+            const [element] = elements;
+
+            openModal(element, [element]);
+
+            expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(0);
+            expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(0);
+        });
+
+        it('should display navigation arrows if there are more images', () => {
+            const elements = getElements('.gallery a');
+            const [element] = elements;
+
+            openModal(element, elements);
+
+            expect(getElements(`.${ MODAL_NEXT_CLASS }`)).to.have.lengthOf(1);
+            expect(getElements(`.${ MODAL_PREV_CLASS }`)).to.have.lengthOf(1);
+        });
     });
 
     describe('closeModal()', () => {
