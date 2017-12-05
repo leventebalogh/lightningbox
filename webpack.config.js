@@ -28,7 +28,7 @@ module.exports = {
                 use: extractSassPlugin.extract({
                     fallback: 'style-loader',
                     use: [
-                        { loader: 'css-loader', options: { sourceMap: true } },
+                        { loader: 'css-loader', options: { sourceMap: true, minimize: true } },
                         { loader: 'sass-loader', options: { sourceMap: true } }
                     ]
                 })
