@@ -34,8 +34,8 @@ lightningbox('.gallery > a');
 ## CDN
 Just use the following code to make `window.lightningbox` available on your site.
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightningbox@1.0.0/dist/lightningbox.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightningbox@1.0.0/dist/lightningbox.min.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lightningbox@latest/dist/lightningbox.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightningbox@latest/dist/lightningbox.min.css" />
 ```
 
 
