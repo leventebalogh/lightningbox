@@ -87,7 +87,9 @@ describe('LightningBox', () => {
             dispatchEvent(`${ LINK_SELECTOR }:first-child`, 'click');
             dispatchEvent(`.${ MODAL_CLOSE_CLASS }`, 'click');
 
-            shouldNotHaveModalOpen();
+            return setTimeout(() => {
+                shouldNotHaveModalOpen();
+            }, 500);
         });
     });
 
@@ -177,7 +179,9 @@ describe('LightningBox', () => {
             openModal(element, elements);
             closeModal();
 
-            shouldNotHaveModalOpen();
+            return setTimeout(() => {
+                shouldNotHaveModalOpen();
+            }, 500);
         });
     });
 

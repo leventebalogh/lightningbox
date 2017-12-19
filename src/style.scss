@@ -1,15 +1,16 @@
-$gutter: 20px !default;
-$color: white !default;
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$background: rgba(0, 0, 0, 0.7) !default;
-$nav-background: rgba(0, 0, 0, 0.6) !default;
-$pagination-background: rgba(0, 0, 0, 0.3) !default;
-$border-radius: 100px !default;
-$transition-time: .2s !default;
+$lb-gutter: 20px !default;
+$lb-color: white !default;
+$lb-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$lb-background: rgba(0, 0, 0, 0.7) !default;
+$lb-nav-background: rgba(0, 0, 0, 0.6) !default;
+$lb-pagination-background: rgba(0, 0, 0, 0.3) !default;
+$lb-border-radius: 100px !default;
+$lb-transition-time: 0.2s !default;
+$lb-animation-duration: 0.5ms !default;
 
 .lb-modal {
-    font-family: $font-family;
-    background: $background;
+    font-family: $lb-font-family;
+    background: $lb-background;
     position: fixed;
     top: 0px;
     left: 0px;
@@ -31,9 +32,9 @@ $transition-time: .2s !default;
     z-index: 5;
     opacity: 0.5;
     transform: scale(0.8);
-    background-color: $nav-background;
-    border-radius: $border-radius;
-    transition: opacity $transition-time;
+    background-color: $lb-nav-background;
+    border-radius: $lb-border-radius;
+    transition: opacity $lb-transition-time;
 
     svg {
         transform: translate(-2px, 0);
@@ -64,11 +65,11 @@ $transition-time: .2s !default;
 }
 
 .lb-modal-next {
-    right: $gutter;
+    right: $lb-gutter;
 }
 
 .lb-modal-prev {
-    left: $gutter;
+    left: $lb-gutter;
 }
 
 .lb-absolute-fit {
@@ -91,12 +92,12 @@ $transition-time: .2s !default;
 }
 
 .lb-modal-pagination {
-    background: $pagination-background;
+    background: $lb-pagination-background;
     position: absolute;
-    bottom: $gutter;
+    bottom: $lb-gutter;
     left: 50%;
     transform: translate(-50%, 0);
-    color: $color;
+    color: $lb-color;
     font-size: 1.2rem;
     padding: 5px 15px;
     border-radius: 100px;
@@ -113,13 +114,13 @@ $transition-time: .2s !default;
 
 .lb-anim-in {
     animation-name: lb-anim-in;
-    animation-duration: 0.5s;
+    animation-duration: $lb-animation-duration;
     animation-fill-mode: both;
 }
 
 .lb-anim-out {
     animation-name: lb-anim-out;
-    animation-duration: 0.5s;
+    animation-duration: $lb-animation-duration;
     animation-fill-mode: both;
 }
 
@@ -142,5 +143,3 @@ $transition-time: .2s !default;
         opacity: 0;
     }
 }
-
-
