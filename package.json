@@ -1,16 +1,22 @@
 {
   "name": "lightningbox",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A small and blazing fast vanilla javascript image viewer.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.js",
     "build": "rm -rf ./build && webpack --config webpack.config.js",
     "test": "mocha --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
-    "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\""
+    "tdd": "mocha --watch --require ignore-styles --require babel-core/register --reporter dot --require ./.mocha-setup.js \"./src/**/*.test.js\"",
+    "bundle-size": "gzip -c dist/lightningbox.min.js | wc -c"
   },
   "author": "Levente Balogh <balogh.levente.hu@gmail.com>",
-  "keywords": ["lightbox", "gallery", "javascript", "vanilla-javascript"],
+  "keywords": [
+    "lightbox",
+    "gallery",
+    "javascript",
+    "vanilla-javascript"
+  ],
   "homepage": "https://lightningbox.leventebalogh.com",
   "repository": {
     "type": "git",
@@ -18,11 +24,10 @@
   },
   "license": "MIT",
   "bugs": {
-    "url" : "https://github.com/leventebalogh/lightningbox/issues",
-    "email" : "bugs@leventebalogh.com"
+    "url": "https://github.com/leventebalogh/lightningbox/issues",
+    "email": "bugs@leventebalogh.com"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

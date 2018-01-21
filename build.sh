@@ -10,10 +10,8 @@
 
 function abspath() {
     if [ -d "$1" ]; then
-        # dir
         (cd "$1"; pwd)
     elif [ -f "$1" ]; then
-        # file
         if [[ $1 == */* ]]; then
             echo "$(cd "${1%/*}"; pwd)/${1##*/}"
         else
@@ -22,10 +20,10 @@ function abspath() {
     fi
 }
 
-# The site directory
-ROOT=$(abspath "${BASH_SOURCE%/*}/..")
+# The repository root
+ROOT=$(abspath "${BASH_SOURCE%/*}")
 
-# Pull
+# Pull changes
 git checkout master
 git pull
 

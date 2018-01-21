@@ -2,5 +2,8 @@
 node_modules
 
 # Build
-build
-dist
+dist/images/*
+dist/index.html
+
+# Editor
+.vscode
