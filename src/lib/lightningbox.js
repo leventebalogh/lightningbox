@@ -1,7 +1,11 @@
-const { addDOMElement, removeDOMElement, addClass, removeClass } = require('./utils');
+const { addDOMElement, removeDOMElement, addClass, removeClass, getAnimationEndEventName } = require('./utils');
 const { arrowLeftSVG, arrowRightSVG, closeSVG } = require('./svgs');
 
 const MODAL_CLASS = 'lb-modal';
+const MODAL_BODY_CLASS = 'lb-modal-is-open';
+const MODAL_FIT_CLASS = 'lb-absolute-fit';
+const MODAL_ANIMATION_IN_CLASS = 'lb-anim-in';
+const MODAL_ANIMATION_OUT_CLASS = 'lb-anim-out';
 const MODAL_IMAGE_CLASS = 'lb-modal-image';
 const MODAL_IMAGES_CLASS = 'lb-modal-images';
 const MODAL_IMAGE_ACTIVE_CLASS = 'lb-modal-image-active';
@@ -13,13 +17,18 @@ const MODAL_PREV_CLASS = 'lb-modal-prev';
 const DEFAULT_STATE = {
     isModalOpen: false,
     activeIndex: 0,
-    activeElementsNumber: 0
+    activeElementsNumber: 0,
+    animationEndEventName: getAnimationEndEventName()
 };
 
 let state = DEFAULT_STATE;
 
 module.exports = {
     MODAL_CLASS,
+    MODAL_BODY_CLASS,
+    MODAL_FIT_CLASS,
+    MODAL_ANIMATION_IN_CLASS,
+    MODAL_ANIMATION_OUT_CLASS,
     MODAL_IMAGE_CLASS,
     MODAL_IMAGES_CLASS,
     MODAL_IMAGE_ACTIVE_CLASS,
@@ -65,6 +74,7 @@ function openModal (element, elements=[]) {
         return;
     }
 
+    addClass(document.body, MODAL_BODY_CLASS);
     setState({ isModalOpen: true });
     setStateFromElements(element, elements);
     addDOMElement(getModalHtml(element, elements));
@@ -72,9 +82,14 @@ function openModal (element, elements=[]) {
 }
 
 function closeModal () {
-    removeDOMElement(`.${ MODAL_CLASS }`);
-    removeEventListeners();
-    setState({ isModalOpen: false });
+    const modalElem = document.querySelector(`.${ MODAL_CLASS }`);
+    modalElem.addEventListener(state.animationEndEventName, function animationEnd() {
+        removeDOMElement(`.${ MODAL_CLASS }`);
+        removeEventListeners();
+        setState({ isModalOpen: false });
+    });
+    removeClass(document.body, MODAL_BODY_CLASS);
+    addClass(modalElem, MODAL_ANIMATION_OUT_CLASS);
 }
 
 function next () {
@@ -191,9 +206,9 @@ function getPrevIndex () {
 
 function getModalHtml (element, elements) {
     return `
-    <div class="${ MODAL_CLASS }">
+    <div class="${ MODAL_ANIMATION_IN_CLASS } ${ MODAL_CLASS }">
         <div class="${ MODAL_CLOSE_CLASS }">${ closeSVG }</div>
-        <div class="${ MODAL_IMAGES_CLASS }">
+        <div class="${ MODAL_FIT_CLASS } ${ MODAL_IMAGES_CLASS }">
             ${ getImagesHtml(element, elements) }
         </div>
         ${ getNavHtml(elements) }
@@ -235,5 +250,5 @@ function getImageHtml (element, isActive=false) {
     const imageUrl = element.getAttribute('href');
     const activeClass = isActive ? MODAL_IMAGE_ACTIVE_CLASS : '';
 
-    return `<div class="${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
+    return `<div class="${ MODAL_FIT_CLASS } ${ MODAL_IMAGE_CLASS } ${ activeClass }" style="background-image: url('${ imageUrl }');"></div>`;
 }
